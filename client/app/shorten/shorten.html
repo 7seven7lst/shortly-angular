@@ -1,7 +1,27 @@
-<div id='container'>
-  <form ng-submit="addLink()">
-    <input type="text" ng-model="link.url">
-    <input type="button">
-    <button>Button</button>
+<div id='creator'>
+  <form name="shortlyForm" ng-submit="addLink()" novalidate>
+    <input name= "link" type="url" 
+    placeholder="Enter url here" required
+    ng-model="link.url" 
+    ng-class="{'error':shortlyForm.$invalid && shortlyForm.$dirty}"/>
+    <button type="submit" value="Shorten" ng-disabled="shortlyForm.$invalid">Add</button>
   </form>
+    <div ng-if="shortlyForm.link.$error.required && shortlyForm.$dirty" class="message">
+      <h2>URL Required</h2>
+    </div>
+    <div ng-show="shortlyForm.link.$error.url && shortlyForm.$dirty">
+      <h2>Not a valid URL</h2>
+    </div>
 </div>
+
+
+
+
+
+
+<!--   <div class='navigation'>
+  <ul>
+    <li><a href='#/links' class='index'>All Links</a></li>
+    <li><a href='#/shorten' class='create'>Shorten</a></li>
+  </ul>
+  </div> -->

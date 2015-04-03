@@ -3,25 +3,32 @@ angular.module('shortly', [
   'shortly.links',
   'shortly.shorten',
   'shortly.auth',
-  'ngRoute'
+  'ngRoute',
+  'ui.router',
+  'ngFx'
 ])
-.config(function($routeProvider, $httpProvider) {
-  $routeProvider
-    .when('/signin', {
-      templateUrl: 'app/auth/signin.html',
-      controller: 'AuthController'
-    })
-    .when('/signup', {
-      templateUrl: 'app/auth/signup.html',
-      controller: 'AuthController'
-    })
-    .when('/links', {
+.config(function($routeProvider, $httpProvider, $stateProvider, $urlRouterProvider) {
+  $urlRouterProvider.otherwise('/links');
+  $stateProvider
+    .state('links', {
       templateUrl: 'app/links/links.html',
-      controller: 'LinksController'
+      controller: 'LinksController',
+      url: '/links'
     })
-    .when('/shorten', {
+    .state('signin', {
+      templateUrl: 'app/auth/signin.html',
+      controller: 'AuthController',
+      url: '/signin'
+    })
+    .state('signup', {
+      templateUrl: 'app/auth/signup.html',
+      controller: 'AuthController',
+      url: '/signup'
+    })
+    .state('shorten', {
       templateUrl: 'app/shorten/shorten.html',
-      controller: 'ShortenController'
+      controller: 'ShortenController',
+      url: '/shorten'
     })
     // .when('/signout', {
     //   templateUrl: 'app/auth/signin.html'
